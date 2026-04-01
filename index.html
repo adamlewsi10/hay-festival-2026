@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hay Festival 2026 — Our Itinerary</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --hay-green: #2D5016;
+    --hay-meadow: #4A7C23;
+    --hay-gold: #C8A438;
+    --hay-cream: #FAF6ED;
+    --hay-warm: #F5EDE0;
+    --hay-rust: #A0522D;
+    --hay-dusk: #5B3A6B;
+    --hay-sky: #6BA3BE;
+    --hay-dark: #1A1A1A;
+    --hay-text: #2C2C2C;
+    --hay-muted: #6B6B6B;
+    --booked: #2D5016;
+    --pilar: #5B3A6B;
+    --ai: #6BA3BE;
+    --wildcard: #C8A438;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--hay-cream);
+    color: var(--hay-text);
+    line-height: 1.6;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--hay-green) 0%, #1a3a0a 60%, var(--hay-dark) 100%);
+    color: white;
+    padding: 80px 40px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .hero .subtitle {
+    font-size: 1.15rem;
+    font-weight: 300;
+    opacity: 0.85;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .hero .dates {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    opacity: 0.7;
+    position: relative;
+  }
+  .hero .base {
+    margin-top: 20px;
+    font-size: 0.95rem;
+    opacity: 0.6;
+    position: relative;
+  }
+
+  /* KEY */
+  .key-bar {
+    background: var(--hay-dark);
+    color: white;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    padding: 14px 20px;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .key-item { display: flex; align-items: center; gap: 8px; }
+  .key-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    display: inline-block;
+  }
+  .key-dot.booked { background: var(--booked); }
+  .key-dot.pilar { background: var(--pilar); }
+  .key-dot.ai { background: var(--ai); }
+  .key-dot.wildcard { background: var(--wildcard); border: 2px dashed var(--hay-dark); width: 14px; height: 14px; }
+
+  /* CONTAINER */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+  /* STINT HEADER */
+  .stint-header {
+    padding: 48px 0 20px;
+    text-align: center;
+  }
+  .stint-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--hay-green);
+  }
+  .stint-header .stint-meta {
+    font-size: 0.95rem;
+    color: var(--hay-muted);
+    margin-top: 6px;
+  }
+  .stint-header .stint-desc {
+    font-size: 1rem;
+    color: var(--hay-text);
+    margin-top: 12px;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    font-style: italic;
+  }
+
+  /* DAY CARD */
+  .day-card {
+    background: white;
+    border-radius: 16px;
+    margin-bottom: 32px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    overflow: hidden;
+  }
+  .day-header {
+    background: linear-gradient(135deg, var(--hay-green), var(--hay-meadow));
+    color: white;
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .day-header.stint2 {
+    background: linear-gradient(135deg, var(--hay-rust), #c06a3a);
+  }
+  .day-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    line-height: 1;
+    opacity: 0.9;
+  }
+  .day-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+  .day-info .day-note {
+    font-size: 0.85rem;
+    opacity: 0.75;
+    font-style: italic;
+  }
+
+  .day-body { padding: 24px 28px; }
+
+  /* EVENT */
+  .event {
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+  .event:last-child { border-bottom: none; }
+
+  .event-time {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--hay-green);
+    padding-top: 2px;
+  }
+  .event.stint2 .event-time { color: var(--hay-rust); }
+
+  .event-content { }
+  .event-title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .event-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--hay-dark);
+  }
+
+  .badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    color: white;
+    white-space: nowrap;
+  }
+  .badge.booked { background: var(--booked); }
+  .badge.pilar { background: var(--pilar); }
+  .badge.ai { background: var(--ai); }
+  .badge.soldout {
+    background: none;
+    color: #cc3333;
+    border: 1.5px solid #cc3333;
+    font-size: 0.65rem;
+  }
+
+  .event-subtitle {
+    font-size: 0.9rem;
+    color: var(--hay-meadow);
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+  .event.stint2 .event-subtitle { color: var(--hay-rust); }
+
+  .event-desc {
+    font-size: 0.92rem;
+    color: var(--hay-muted);
+    line-height: 1.55;
+  }
+  .event-desc strong { color: var(--hay-text); }
+
+  .event-venue {
+    font-size: 0.8rem;
+    color: var(--hay-muted);
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  /* WILDCARD SECTION */
+  .wildcards {
+    margin-top: 12px;
+    padding: 16px 20px;
+    background: #FFFBF0;
+    border-left: 4px solid var(--wildcard);
+    border-radius: 0 12px 12px 0;
+  }
+  .wildcards-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--hay-gold);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .wildcard-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #f0e8d0;
+  }
+  .wildcard-item:last-child { border-bottom: none; }
+  .wildcard-item .wc-time {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--hay-gold);
+  }
+  .wildcard-item .wc-name {
+    font-weight: 600;
+    color: var(--hay-dark);
+    font-size: 0.95rem;
+  }
+  .wildcard-item .wc-desc {
+    font-size: 0.85rem;
+    color: var(--hay-muted);
+    margin-top: 2px;
+  }
+
+  /* MORNING SUGGESTION */
+  .morning {
+    padding: 16px 20px;
+    background: linear-gradient(135deg, #f0f7ec, #e8f2e0);
+    border-radius: 12px;
+    margin-bottom: 16px;
+  }
+  .morning-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--hay-meadow);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .morning-text {
+    font-size: 0.92rem;
+    color: var(--hay-text);
+  }
+
+  /* FOOTER */
+  .footer {
+    background: var(--hay-dark);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 40px 24px;
+    margin-top: 48px;
+    font-size: 0.85rem;
+    line-height: 1.8;
+  }
+  .footer strong { color: rgba(255,255,255,0.9); }
+
+  /* NOTES */
+  .practical-notes {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    margin: 32px auto;
+    max-width: 900px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+  }
+  .practical-notes h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--hay-green);
+    margin-bottom: 12px;
+  }
+  .practical-notes ul {
+    list-style: none;
+    padding: 0;
+  }
+  .practical-notes li {
+    padding: 6px 0;
+    font-size: 0.92rem;
+    color: var(--hay-muted);
+    padding-left: 20px;
+    position: relative;
+  }
+  .practical-notes li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--hay-meadow);
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 48px 20px 40px; }
+    .event { grid-template-columns: 56px 1fr; gap: 10px; }
+    .event-time { font-size: 1.1rem; }
+    .day-body { padding: 16px 18px; }
+    .key-bar { gap: 16px; font-size: 0.78rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Hay Festival 2026</h1>
+  <div class="subtitle">The Woodstock of the Mind</div>
+  <div class="dates">Saturday 24 – Saturday 30 May</div>
+  <div class="base">Staying at Lower Court, Clifford · ~10 mins from the festival site</div>
+</div>
+
+<div class="key-bar">
+  <div class="key-item"><span class="key-dot booked"></span> Booked by Adam</div>
+  <div class="key-item"><span class="key-dot pilar"></span> Recommended by Pilar</div>
+  <div class="key-item"><span class="key-dot ai"></span> Recommended by AI</div>
+  <div class="key-item"><span class="key-dot wildcard"></span> Wildcard — worth a look</div>
+</div>
+
+<div class="container">
+
+  <!-- ======================== STINT 1 ======================== -->
+  <div class="stint-header">
+    <h2>Stint 1 — The Four of Us</h2>
+    <div class="stint-meta">Sunday 24 – Tuesday 26 May</div>
+    <div class="stint-desc">Adam, Owen, Pilar &amp; Lisa together at Lower Court, Clifford. Rolling hills, long evenings, and ideas worth arguing about over supper.</div>
+  </div>
+
+  <!-- ===== SUNDAY 24 MAY ===== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">24</div>
+      <div class="day-info">
+        <h3>Sunday — Opening Day</h3>
+        <div class="day-note">First day on site · ease in, soak it up</div>
+      </div>
+    </div>
+    <div class="day-body">
+
+      <div class="morning">
+        <div class="morning-label">Morning Option</div>
+        <div class="morning-text"><strong>Wayfaring Walk</strong> — Guided walk through the stunning Bannau Brycheiniog (Brecon Beacons) National Park surrounds. A gentle way to arrive into the festival rhythm before the tents fill up. Walks depart from site, typically ~90 mins.</div>
+      </div>
+
+      <div class="event">
+        <div class="event-time">11:30</div>
+        <div class="event-content">
+          <div class="event-title-row">
+            <span class="event-title">Reverend Richard Coles</span>
+            <span class="badge booked">Booked</span>
+            <span class="badge soldout">Sold Out</span>
+          </div>
+          <div class="event-subtitle">A Heist Before Bedtime — funny true stories for all the family</div>
+          <div class="event-desc">
+            <strong>Who:</strong> Former pop star (The Communards), Church of England priest, beloved BBC Radio 4 presenter of <em>Saturday Live</em> for 11 years, and now best-selling crime novelist. One of Britain's most unlikely and endearing public figures.<br><br>
+            <strong>What:</strong> Richard shares fantastical true stories from his first children's book — the theft of Einstein's brain, the great maple syrup heist, and McDonald's involvement in a million-dollar crime. Uproarious storytelling that works for all ages. Perfect opener.
+          </div>
+          <div class="event-venue">Meadow Stage · £10</div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time">16:00</div>
+        <div class="event-content">
+          <div class="event-title-row">
+            <span class="event-title">Public Philosophy</span>
+            <span class="badge ai">AI Pick</span>
+          </div>
+          <div class="event-subtitle">Ideas for everyday life</div>
+          <div class="event-desc">
+            <strong>What:</strong> Hay always runs philosophy sessions that aim to make big ideas accessible and debatable — the kind of thing you end up talking about all evening. Check the specific speaker closer to the day. Likely to cover questions of morality, meaning, and how we live now.<br><br>
+            <strong>Why:</strong> Great palate cleanser between the morning and the headliners. Gets the group thinking and disagreeing — ideal warm-up for supper conversation.
+          </div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time">17:30</div>
+        <div class="event-content">
+          <div class="event-title-row">
+            <span class="event-title">Empire of AI</span>
+            <span class="badge ai">AI Pick</span>
+          </div>
+          <div class="event-subtitle">The power, politics, and future of artificial intelligence</div>
+          <div class="event-desc">
+            <strong>What:</strong> AI is one of Hay 2026's headline themes. Tim Berners-Lee (inventor of the World Wide Web) is at the festival discussing his memoir/manifesto "This is for Everyone: Reclaiming the Web in the Age of AI." Several AI-focused panels run across the week — this session promises to tackle how AI is reshaping power structures, who controls it, and what it means for all of us.<br><br>
+            <strong>Why:</strong> Right in Adam's professional wheelhouse. Expect big questions about agency, control, and whether we're building something liberating or something that owns us.
+          </div>
+        </div>
+      </div>
+
+      <div class="wildcards">
+        <div class="wildcards-title">🎲 Wildcards for Sunday</div>
+        <div class="wildcard-item">
+          <div><span class="wc-time">10:00</span> · <span class="wc-name">David Miliband, Susan Neiman &amp; Philippe Sands — Where Does Europe Fit in the New World Order?</span></div>
+          <div class="wc-desc">Former Foreign Secretary, a philosopher, and an international law expert tackle Europe's relevance in the age of US-China rivalry. Sharp, heavyweight, and timely. Discovery Stage, £20.</div>
+        </div>
+        <div class="wildcard-item">
+          <div><span class="wc-time">10:00</span> · <span class="wc-name">Claudia Hammond — Overwhelmed: Ways to Take the Pressure Off</span></div>
+          <div class="wc-desc">BBC Radio 4's <em>All in the Mind</em> presenter offers evidence-based strategies for managing procrastination, imposter syndrome, and modern overload. Practical and warm. Meadow Stage, £16.</div>
+        </div>
+        <div class="wildcard-item">
+          <div><span class="wc-time">11:30</span> · <span class="wc-name">America 250: Revolution — Sarah Churchwell, David Olusoga &amp; Sarah Pearsall</span></div>
+          <div class="wc-desc">250 years after the Declaration of Independence — what's really changed? Myths, empire, and the fires of revolution re-examined. Discovery Stage, £18.</div>
+        </div>
+        <div class="wildcard-item">
+          <div><span class="wc-time">13:00</span> · <span class="wc-name">Michael Morpurgo with Jenny Agutter &amp; the Brodsky Quartet</span></div>
+          <div class="wc-desc">Poetry and narration woven through a live performance of Vivaldi's Four Seasons. A unique, beautiful one-off. Global Stage, £24.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== MONDAY 25 MAY ===== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">25</div>
+      <div class="day-info">
+        <h3>Monday — Bank Holiday</h3>
+        <div class="day-note">Festival in full flow · the site will be buzzing</div>
+      </div>
+    </div>
+    <div class="day-body">
+
+      <div class="event">
+        <div class="event-time">11:30</div>
+        <div class="event-content">
+          <div class="event-title-row">
+            <span class="event-title">Tim Spector — Fermentation</span>
+            <span class="badge booked">Booked</span>
+          </div>
+          <div class="event-subtitle">The gut health guru on the science of fermented foods</div>
+          <div class="event-desc">
+            <strong>Who:</strong> Professor of Genetic Epidemiology at King's College London. Co-founder of the ZOE personalised nutrition programme. Author of <em>Food for Life</em> and <em>Spoon-Fed</em> — both massive bestsellers that changed how millions think about food. One of the world's leading voices on gut health and the microbiome.<br><br>
+            <strong>What:</strong> A deep dive into fermentation — why it matters, what the science says, and how to do it properly. Spector is an electrifying speaker who makes complex science feel urgent and personal. Expect to leave wanting to make your own kimchi.
+          </div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time">19:00</div>
+        <div class="event-content">
+          <div class="event-title-row">
+            <span class="event-title">Hans Ulrich Obrist</span>
+            <span class="badge pilar">Pilar Pick</span>
+          </div>
+          <div class="event-subtitle">The world's most influential curator</div>
+          <div class="event-desc">
+            <strong>Who:</strong> Artistic Director of the Serpentine Galleries in London. Widely considered the most powerful and prolific curator in contemporary art. Has conducted over 3,000 hours of artist interviews. Known for his marathon conversations, boundary-pushing exhibitions, and restless intellectual energy. ArtReview has repeatedly named him the most influential person in the art world.<br><br>
+            <strong>What:</strong> Pilar's recommendation — and for good reason. Obrist brings a rare combination of creative ambition and philosophical curiosity. Whether he's discussing AI and art, the future of institutions, or his legendary conversations with the likes of David Bowie and Rem Koolhaas, this will be unlike anything else at the festival. Expect to be challenged.
+          </div>
+        </div>
+      </div>
+
+      <div class="wildcards">
+        <div class="wildcards-title">🎲 Wildcards for Monday</div>
+        <div class="wildcard-item">
+          <div><span class="wc-time">TBC</span> · <span class="wc-name">Sophie Raworth interviews Kate Raworth — Doughnut Economics</span></div>
+          <div class="wc-desc">BBC News presenter interviews her sister, the economist whose "Doughnut Economics" model has been adopted by Amsterdam, Barcelona, and others as a blueprint for sustainable growth. Family dynamics meet world-changing ideas.</div>
+        </div>
+        <div class="wildcard-item">
+          <div><span class="wc-time">TBC</span> · <span class="wc-name">Mariana Mazzucato — The Common Good Economy</span></div>
+          <div class="wc-desc">Nobel Prize-winning economist who advised governments worldwide on innovation policy. If you've heard the phrase "the entrepreneurial state," it's hers. Provocative and brilliant.</div>
+        </div>
+        <div class="wildcard-item">
+          <div><span class="wc-time">TBC</span> · <span class="wc-name">Devi Sridhar &amp; Dan Davis — How Not to Die (Too Soon)</span></div>
+          <div class="wc-desc">Public health expert Sridhar busts myths about what really determines how long we live. Evidence-based, punchy, and pairs nicely with the Spector session earlier.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== TUESDAY 26 MAY ===== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">26</div>
+      <div class="day-info">
+        <h3>Tuesday — Crime Day Spotlight</h3>
+        <div class="day-note">Crime Day at Hay · espionage &amp; AI collide</div>
+      </div>
+    </div>
+    <div class="day-body">
+
+      <div class="event">
+        <div class="event-time">11:30</div>
+        <div class="event-content">
+          <div class="event-title-row">
+            <span class="event-title">Ben Macintyre — Spies, Lies and Skulduggery</span>
+            <span class="badge pilar">Pilar Pick</span>
+          </div>
+          <div class="event-subtitle">The secretive history of espionage</div>
+          <div class="event-desc">
+            <strong>Who:</strong> One of Britain's greatest narrative non-fiction writers. Associate Editor at <em>The Times</em>. His spy books — <em>A Spy Among Friends</em> (adapted into an Apple TV+ series with Guy Pearce and Damian Lewis), <em>The Spy and the Traitor</em>, <em>Agent Zigzag</em>, <em>Operation Mincemeat</em> (turned into a Netflix film) — read like thrillers but are meticulously researched true stories.<br><br>
+            <strong>What:</strong> Macintyre explores the hidden history of espionage — the double agents, the betrayals, the absurd bravery. His storytelling is cinematic and gripping. Pilar knows what she's doing with this one.
+          </div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time">17:30</div>
+        <div class="event-content">
+          <div class="event-title-row">
+            <span class="event-title">Jamie Bartlett — How to Talk to AI</span>
+            <span class="badge ai">AI Pick</span>
+          </div>
+          <div class="event-subtitle">A practical guide to the AI conversation</div>
+          <div class="event-desc">
+            <strong>Who:</strong> Author, journalist, and tech commentator. Former Director of the Centre for the Analysis of Social Media at Demos. Author of <em>The Dark Net</em> (a ground-breaking exploration of the internet's hidden side) and <em>The People Vs Tech</em> (on how technology threatens democracy). Presenter of the BBC podcast <em>The Missing Cryptoqueen</em>, one of the most downloaded podcasts in BBC history.<br><br>
+            <strong>What:</strong> Bartlett brings a rare ability to explain technology in human terms. This session tackles the most practical question of the AI age: how do we actually interact with these systems? What should we ask? What should we be wary of? Perfect for Adam's AI interests — and useful for everyone in the group.
+          </div>
+        </div>
+      </div>
+
+      <div class="wildcards">
+        <div class="wildcards-title">🎲 Wildcards for Tuesday</div>
+        <div class="wildcard-item">
+          <div><span class="wc-time">TBC</span> · <span class="wc-name">Val McDermid — Crime Day Headliner</span></div>
+          <div class="wc-desc">The queen of Scottish crime fiction, bestselling author of over 40 books. She headlines Crime Day alongside Fflur Dafydd for <em>Silent Bones</em>. If you love a good thriller, this is unmissable.</div>
+        </div>
+        <div class="wildcard-item">
+          <div><span class="wc-time">TBC</span> · <span class="wc-name">Antony Beevor — Rasputin and the Downfall of the Romanovs</span></div>
+          <div class="wc-desc">Britain's foremost military historian turns his attention to one of history's most extraordinary characters. The man who wrote <em>Stalingrad</em> and <em>D-Day</em> now gives us Rasputin. Gripping.</div>
+        </div>
+        <div class="wildcard-item">
+          <div><span class="wc-time">TBC</span> · <span class="wc-name">Irvine Welsh &amp; Kevin Rowland — Bless Me Father</span></div>
+          <div class="wc-desc">The author of <em>Trainspotting</em> in conversation with the Dexys Midnight Runners frontman about Rowland's memoir. Two iconoclasts, one stage. Expect fireworks.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================== STINT 2 ======================== -->
+  <div class="stint-header">
+    <h2>Stint 2 — Just Adam &amp; Owen</h2>
+    <div class="stint-meta">Wednesday 27 – Saturday 30 May</div>
+    <div class="stint-desc">Pilar and Lisa head home. The lads dig deeper — bigger questions, bolder choices, and nobody to tell you the third talk of the day is too many.</div>
+  </div>
+
+  <!-- ===== WEDNESDAY 27 MAY ===== -->
+  <div class="day-card">
+    <div class="day-header stint2">
+      <div class="day-number">27</div>
+      <div class="day-info">
+        <h3>Wednesday — Optional / Ease-In Day</h3>
+        <div class="day-note">Graphic Novel Day spotlight · lighter schedule</div>
+      </div>
+    </div>
+    <div class="day-body">
+
+      <div class="morning">
+        <div class="morning-label">Optional Day</div>
+        <div class="morning-text">This is marked as optional — take a walk, explore Hay's bookshops (there are dozens), or sit in the Wild Garden on site with a coffee. Or go all in on the afternoon.</div>
+      </div>
+
+      <div class="event stint2">
+        <div class="event-time">17:30</div>
+        <div class="event-content">
+          <div class="event-title-row">
+            <span class="event-title">Is AI Making Us Stupid?</span>
+            <span class="badge ai">AI Pick</span>
+          </div>
+          <div class="event-subtitle">A provocation on intelligence, technology, and human capability</div>
+          <div class="event-desc">
+            <strong>What:</strong> One of Hay's "Heard at Hay Festival" debate panels — designed to spark thought-provoking, sometimes uncomfortable conversations. This one goes right at the heart of the AI question: are the tools making us sharper or lazier? Are we outsourcing our thinking? What does intelligence even mean now?<br><br>
+            <strong>Why:</strong> After Jamie Bartlett's practical session yesterday, this takes the philosophical view. Great fuel for a two-man evening debate back at Clifford.
+          </div>
+        </div>
+      </div>
+
+      <div class="event stint2">
+        <div class="event-time">19:00</div>
+        <div class="event-content">
+          <div class="event-title-row">
+            <span class="event-title">Private Eye — Politics &amp; Humour</span>
+            <span class="badge ai">AI Pick</span>
+          </div>
+          <div class="event-subtitle">Ian Hislop and the razor-sharp eye of British satire</div>
+          <div class="event-desc">
+            <strong>Who:</strong> Ian Hislop is the editor of <em>Private Eye</em> (since 1986!) and a team captain on <em>Have I Got News For You</em>. He's the most sued man in English legal history and arguably Britain's sharpest satirist. At Hay, he's doing a "My Life in Books" session with journalist Decca Aitkenhead.<br><br>
+            <strong>What:</strong> Expect savage political commentary, surprising literary recommendations, and the kind of wit that makes you laugh out loud and then worry about the state of the country. After the local elections in May, this should be particularly spicy.
+          </div>
+        </div>
+      </div>
+
+      <div class="wildcards">
+        <div class="wildcards-title">🎲 Wildcards for Wednesday</div>
+        <div class="wildcard-item">
+          <div><span class="wc-time">TBC</span> · <span class="wc-name">Graphic Novel Day — led by Neill Cameron</span></div>
+          <div class="wc-desc">Wednesday is Graphic Novel Day at Hay — a spectacular programme of illustration, storytelling, and visual creativity. Even if you're not into comics, the sessions are often unexpectedly brilliant.</div>
+        </div>
+        <div class="wildcard-item">
+          <div><span class="wc-time">TBC</span> · <span class="wc-name">Tim Minchin — You Don't Have to Have a Dream</span></div>
+          <div class="wc-desc">The comedian, composer, and Matilda creator calls for more creativity in everyday life. Funny, moving, and guaranteed to make you think differently about ambition.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== THURSDAY 28 MAY ===== -->
+  <div class="day-card">
+    <div class="day-header stint2">
+      <div class="day-number">28</div>
+      <div class="day-info">
+        <h3>Thursday — The Big Day</h3>
+        <div class="day-note">Three sessions back to back · bring snacks</div>
+      </div>
+    </div>
+    <div class="day-body">
+
+      <div class="event stint2">
+        <div class="event-time">10:00</div>
+        <div class="event-content">
+          <div class="event-title-row">
+            <span class="event-title">US Politics Session</span>
+            <span class="badge ai">AI Pick</span>
+          </div>
+          <div class="event-subtitle">America under the microscope</div>
+          <div class="event-desc">
+            <strong>What:</strong> 2026 marks 250 years since the Declaration of Independence, and Hay has a strong US politics thread running through the festival. Expect sharp analysis of the post-election American landscape — the culture wars, the global implications, and what comes next. Historians Sarah Churchwell and David Olusoga are both at the festival tackling these themes.<br><br>
+            <strong>Why:</strong> The US shapes everything — markets, technology, geopolitics. Worth understanding from people who've spent decades studying it.
+          </div>
+        </div>
+      </div>
+
+      <div class="event stint2">
+        <div class="event-time">13:00</div>
+        <div class="event-content">
+          <div class="event-title-row">
+            <span class="event-title">Bear Grylls — My Life in Books</span>
+            <span class="badge booked">Booked</span>
+          </div>
+          <div class="event-subtitle">with podcaster Jamie Laing</div>
+          <div class="event-desc">
+            <strong>Who:</strong> The world's most famous adventurer. Former SAS reservist, youngest Brit to summit Everest (at 23), Chief Scout, and host of multiple survival TV shows watched by billions globally. Author of over 30 books. A genuinely extraordinary life lived at the edge — from a freefall parachuting accident that broke his back to crossing the North Atlantic in an inflatable boat.<br><br>
+            <strong>What:</strong> Part of Hay's new "My Life in Books" series, where public figures open their personal libraries. Bear shares the books that shaped him, interviewed by Jamie Laing (Made in Chelsea, <em>Private Parts</em> podcast). Expect to be surprised by what an action man reads — and inspired by how stories fuelled his adventures.
+          </div>
+        </div>
+      </div>
+
+      <div class="event stint2">
+        <div class="event-time">17:30</div>
+        <div class="event-content">
+          <div class="event-title-row">
+            <span class="event-title">Technology, Women &amp; Africa</span>
+            <span class="badge ai">AI Pick</span>
+          </div>
+          <div class="event-subtitle">How tech is reshaping a continent</div>
+          <div class="event-desc">
+            <strong>What:</strong> Hay's global programme includes powerful sessions on how technology is transforming Africa — particularly through the lens of women leading that change. Expect stories of innovation, mobile banking revolutions, and the leapfrogging of Western infrastructure.<br><br>
+            <strong>Why:</strong> A refreshing counterpoint to the Western-centric AI and tech conversations. Real stories of real impact.
+          </div>
+        </div>
+      </div>
+
+      <div class="wildcards">
+        <div class="wildcards-title">🎲 Wildcards for Thursday</div>
+        <div class="wildcard-item">
+          <div><span class="wc-time">TBC</span> · <span class="wc-name">Jeremy Bowen — Christopher Hitchens Lecture: War, Peace and the Pursuit of Truth</span></div>
+          <div class="wc-desc">The BBC's most experienced war correspondent delivers Hay's most prestigious lecture. Bowen has reported from every major conflict zone for 30+ years. Unmissable if there's space.</div>
+        </div>
+        <div class="wildcard-item">
+          <div><span class="wc-time">TBC</span> · <span class="wc-name">Serhii Plokhy — The Harvard Lecture on Ukraine</span></div>
+          <div class="wc-desc">Harvard's professor of Ukrainian history delivers one of the three headline lectures. Essential context for understanding the war and its global ripple effects.</div>
+        </div>
+        <div class="wildcard-item">
+          <div><span class="wc-time">TBC</span> · <span class="wc-name">Michail Antonio &amp; James Bloodworth — Modern Masculinity</span></div>
+          <div class="wc-desc">Premier League footballer and investigative journalist tackle masculinity head-on. Honest, urgent, and probably uncomfortable in the best way.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== FRIDAY 29 MAY ===== -->
+  <div class="day-card">
+    <div class="day-header stint2">
+      <div class="day-number">29</div>
+      <div class="day-info">
+        <h3>Friday — Nature &amp; Power</h3>
+        <div class="day-note">A mix of outdoors and big-stage conversations</div>
+      </div>
+    </div>
+    <div class="day-body">
+
+      <div class="morning">
+        <div class="morning-label">Morning Option</div>
+        <div class="morning-text"><strong>Guided Nature Walk</strong> — Led by guides from the Bannau Brycheiniog National Park. Explore the landscape around Hay-on-Wye before the day's events. A chance to clear your head and remember that not everything worth thinking about happens in a tent.</div>
+      </div>
+
+      <div class="event stint2">
+        <div class="event-time">13:00</div>
+        <div class="event-content">
+          <div class="event-title-row">
+            <span class="event-title">AC Grayling</span>
+            <span class="badge ai">AI Pick</span>
+          </div>
+          <div class="event-subtitle">Philosophy for the modern world</div>
+          <div class="event-desc">
+            <strong>Who:</strong> One of Britain's foremost public philosophers. Founder and Master of the New College of the Humanities. Author of over 30 books including <em>The Good Book</em> (a secular bible), <em>Democracy and Its Crisis</em>, and <em>The History of Philosophy</em>. A regular at Hay and always one of the most intellectually stimulating speakers on the programme. Fellow of the Royal Society of Literature.<br><br>
+            <strong>What:</strong> Grayling will likely address the intersection of philosophy, politics, and our changing world. He's been vocal on Brexit, AI ethics, and the crisis of liberal democracy. Sharp, eloquent, and unafraid to take a position.
+          </div>
+        </div>
+      </div>
+
+      <div class="event stint2">
+        <div class="event-time">16:00</div>
+        <div class="event-content">
+          <div class="event-title-row">
+            <span class="event-title">Nicola Sturgeon</span>
+            <span class="badge ai">AI Pick</span>
+          </div>
+          <div class="event-subtitle">Former First Minister of Scotland</div>
+          <div class="event-desc">
+            <strong>Who:</strong> Scotland's longest-serving First Minister (2014–2023) and former leader of the SNP. The first woman to hold the office. Led Scotland through the pandemic, the Brexit aftermath, and the independence debate. Love her or challenge her, she's one of the most significant political figures of the last decade in British politics.<br><br>
+            <strong>What:</strong> Sturgeon will be taking stock of the changing landscape of British politics, alongside other political voices at the festival. Expect reflections on leadership, resilience, and what post-election Britain looks like from the outside. A strong conversationalist who doesn't duck difficult questions.
+          </div>
+        </div>
+      </div>
+
+      <div class="wildcards">
+        <div class="wildcards-title">🎲 Wildcards for Friday</div>
+        <div class="wildcard-item">
+          <div><span class="wc-time">TBC</span> · <span class="wc-name">Malala Yousafzai — Finding My Way</span></div>
+          <div class="wc-desc">Nobel Peace Prize laureate. Shot by the Taliban aged 15. Now the world's most famous education activist. Her new book is about the journey from activist to adult. One of the festival's biggest draws — book early or you won't get in.</div>
+        </div>
+        <div class="wildcard-item">
+          <div><span class="wc-time">TBC</span> · <span class="wc-name">Gisèle Pelicot — A Hymn to Life</span></div>
+          <div class="wc-desc">The French woman whose court case shocked the world. Her courage in waiving anonymity changed the conversation about sexual violence in France. Powerful, brave, and historic.</div>
+        </div>
+        <div class="wildcard-item">
+          <div><span class="wc-time">TBC</span> · <span class="wc-name">Charlie Mackesy</span></div>
+          <div class="wc-desc">The artist behind <em>The Boy, the Mole, the Fox and the Horse</em> — the book that became an Oscar-winning short film. His gentle, profound drawings have comforted millions. Expect to feel something.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== SATURDAY 30 MAY ===== -->
+  <div class="day-card">
+    <div class="day-header stint2">
+      <div class="day-number">30</div>
+      <div class="day-info">
+        <h3>Saturday — Grand Finale</h3>
+        <div class="day-note">Last full day · go out on a high</div>
+      </div>
+    </div>
+    <div class="day-body">
+
+      <div class="event stint2">
+        <div class="event-time">10:00</div>
+        <div class="event-content">
+          <div class="event-title-row">
+            <span class="event-title">Peace &amp; Conflict Session</span>
+            <span class="badge ai">AI Pick</span>
+          </div>
+          <div class="event-subtitle">Understanding a world at war</div>
+          <div class="event-desc">
+            <strong>What:</strong> Hay 2026 has a strong peace and conflict strand — Palestinian writer Aziz Abu Sarah and Israeli writer Maoz Inon are at the festival discussing their visionary book <em>The Future is Peace</em> with BBC Chief International Correspondent Lyse Doucet. Jeremy Bowen and Serhii Plokhy also contribute to this thread across the week.<br><br>
+            <strong>Why:</strong> In a world that feels increasingly fractured, these are the conversations that matter most. Real people with real stakes, not pundits. Start the last day with something that counts.
+          </div>
+        </div>
+      </div>
+
+      <div class="event stint2">
+        <div class="event-time">13:00</div>
+        <div class="event-content">
+          <div class="event-title-row">
+            <span class="event-title">Kate &amp; Sophie Raworth — Doughnut Economics</span>
+            <span class="badge booked">Booked</span>
+          </div>
+          <div class="event-subtitle">BBC News presenter interviews her economist sister</div>
+          <div class="event-desc">
+            <strong>Who:</strong> <strong>Kate Raworth</strong> is the Oxford economist whose "Doughnut Economics" model has been adopted by Amsterdam, Copenhagen, and dozens of other cities as a blueprint for sustainable growth. Her TED talk has been viewed millions of times. The model reimagines economics as a system that meets human needs without overshooting planetary boundaries. <strong>Sophie Raworth</strong> is one of the BBC's most recognisable newsreaders.<br><br>
+            <strong>What:</strong> Sister interviews sister about one of the most important economic ideas of the 21st century. The family dynamic adds warmth and honesty to what could otherwise be a dry policy conversation. Sophie is also at the festival talking about her marathon journey — but this is the headliner.
+          </div>
+        </div>
+      </div>
+
+      <div class="event stint2">
+        <div class="event-time">16:00</div>
+        <div class="event-content">
+          <div class="event-title-row">
+            <span class="event-title">Climate Fiction Prize</span>
+            <span class="badge ai">AI Pick</span>
+          </div>
+          <div class="event-subtitle">Stories that imagine our future</div>
+          <div class="event-desc">
+            <strong>What:</strong> Climate fiction ("cli-fi") has become one of the most vital literary genres of the decade. This session celebrates the best new writing that imagines how we'll live with — and respond to — climate change. Samantha Harvey (Booker Prize winner for <em>Orbital</em>) is at the festival and represents the kind of literary ambition that's reshaping how we tell stories about the planet.<br><br>
+            <strong>Why:</strong> A perfect way to close the festival — forward-looking, creative, and hopeful. Take the ideas home with you.
+          </div>
+        </div>
+      </div>
+
+      <div class="wildcards">
+        <div class="wildcards-title">🎲 Wildcards for Saturday</div>
+        <div class="wildcard-item">
+          <div><span class="wc-time">TBC</span> · <span class="wc-name">Emma Thompson — My Life in Books</span></div>
+          <div class="wc-desc">National treasure. Oscar winner. Screenwriter. Activist. In conversation with Elizabeth Day. She'll be funny, fierce, and probably swear beautifully. Global Stage — book now.</div>
+        </div>
+        <div class="wildcard-item">
+          <div><span class="wc-time">TBC</span> · <span class="wc-name">Dawn French — New Novel</span></div>
+          <div class="wc-desc">The comedy legend discusses her latest fiction. Warm, hilarious, and a perfect late-festival pick-me-up.</div>
+        </div>
+        <div class="wildcard-item">
+          <div><span class="wc-time">TBC</span> · <span class="wc-name">Nicholas Stern — Climate &amp; Economics</span></div>
+          <div class="wc-desc">The author of the Stern Review — the report that changed how governments think about the economic cost of climate change. If you're seeing the Climate Fiction Prize, this pairs perfectly.</div>
+        </div>
+        <div class="wildcard-item">
+          <div><span class="wc-time">Evening</span> · <span class="wc-name">The Amy Winehouse Band</span></div>
+          <div class="wc-desc">Amy's original band perform her music live. A dazzling, emotional performance to close out a brilliant week. The perfect last night.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PRACTICAL NOTES -->
+  <div class="practical-notes">
+    <h3>Practical Notes</h3>
+    <ul>
+      <li><strong>Base:</strong> Lower Court, Clifford — approximately 10 minutes' drive from the festival site</li>
+      <li><strong>Between events:</strong> Allow 15 minutes between venues on site — it's a big field</li>
+      <li><strong>Free site access:</strong> The Dairy Meadows site is free to enter — you only need tickets for individual events</li>
+      <li><strong>Bookshops:</strong> Hay-on-Wye has dozens of independent bookshops. Leave time to explore, especially on the optional Wednesday</li>
+      <li><strong>Wild Garden:</strong> New for 2026 — a space on site for reflection between sessions</li>
+      <li><strong>MUBI Cinema:</strong> Free short film screenings throughout — great for filling a gap</li>
+      <li><strong>Food &amp; drink:</strong> The Garden Kitchen on site has demos, tastings, and great food</li>
+      <li><strong>Hay Castle:</strong> Guided tours at 11am and 2pm daily. 800 years of history and stunning views across the Wye Valley</li>
+      <li><strong>Focus themes:</strong> AI, politics, philosophy, nature — this itinerary leans hard into all four</li>
+      <li><strong>Wildcard times:</strong> Marked TBC — check the programme closer to the date for exact slots and book early</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">
+  <strong>Hay Festival 2026</strong><br>
+  21–31 May · Hay-on-Wye · Bannau Brycheiniog National Park<br><br>
+  "The Woodstock of the Mind" — Bill Clinton<br><br>
+  <em>Itinerary prepared for Adam, Owen, Pilar &amp; Lisa</em>
+</div>
+
+</body>
+</html>
